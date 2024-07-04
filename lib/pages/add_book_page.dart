@@ -58,33 +58,35 @@ class _AddBookPageState extends State<AddBookPage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(15.0),
         child: ElevatedButton(
-          onPressed: () => postBooks(),
+          onPressed: () {
+            // postBooks();
+          },
           child: const Text('Submit'),
         ),
       ),
     );
   }
 
-  Future postBooks() async {
-    if (!form.currentState!.validate()) return;
-    OverlayLoadingProgress.start(context);
-    BookModel book = BookModel(
-      title: titleController.text,
-      author: authorController.text,
-    );
+  // Future postBooks() async {
+  //   if (!form.currentState!.validate()) return;
+  //   OverlayLoadingProgress.start(context);
+  //   BookModel book = BookModel(
+  //     title: titleController.text,
+  //     author: authorController.text,
+  //   );
 
-    final response = await bookRepository.storeBook(book);
-    OverlayLoadingProgress.stop();
-    response.fold((result) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Create ${result.title} successfully!'),
-      ));
+  //   final response = await bookRepository.storeBook(book);
+  //   OverlayLoadingProgress.stop();
+  //   response.fold((result) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text('Create ${result.title} successfully!'),
+  //     ));
 
-      Navigator.pop(context, result);
-    }, (result) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(result.message ?? ''),
-      ));
-    });
-  }
+  //     Navigator.pop(context, result);
+  //   }, (result) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(result.message ?? ''),
+  //     ));
+  //   });
+  // }
 }
